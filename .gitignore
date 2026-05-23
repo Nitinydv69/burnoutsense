@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+.venv/
+env/
+venv/
+
+# Poetry
+poetry.lock
+
+# Mac
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Dataset
+training/dataset.csv
+
+# Models (optional)
+# app/model.pkl
+# app/encoders.pkl
+# app/feature_columns.pkl
