@@ -334,6 +334,6 @@ It is not a medical diagnosis tool and should not be used as a substitute for pr
 
 Nitin Yadav
 University of Milan
-Master’s Student
+Master’s of Data Science for Economics and Health
 
 Project: BurnoutSense
