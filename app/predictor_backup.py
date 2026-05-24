@@ -1,52 +1,42 @@
 import joblib
 import pandas as pd
-from pathlib import Path
 
 
 class BurnoutPredictor:
 
-    def __init__(self):
+    def __init__(self, model_path):
 
-        base_path = Path(__file__).resolve().parent
-
-        self.model = joblib.load(
-            base_path / "model.pkl"
-        )
+        self.model = joblib.load(model_path)
 
         self.encoders = joblib.load(
-            base_path / "encoders.pkl"
+            "app/encoders.pkl"
         )
 
         self.feature_columns = joblib.load(
-            base_path / "feature_columns.pkl"
+            "app/feature_columns.pkl"
         )
 
     def predict(self, data_dict):
 
         df = pd.DataFrame([data_dict])
 
+        # Encode categorical columns
         for column, encoder in self.encoders.items():
 
             if column in df.columns:
 
-                try:
-                    df[column] = encoder.transform(
-                        df[column]
-                    )
+                df[column] = encoder.transform(
+                    df[column]
+                )
 
-                except Exception:
-                    df[column] = 0
-
-        for col in self.feature_columns:
-
-            if col not in df.columns:
-                df[col] = 0
-
+        # Ensure same feature order
         df = df[self.feature_columns]
 
         prediction = self.model.predict(df)[0]
 
-        probabilities = self.model.predict_proba(df)[0]
+        probabilities = self.model.predict_proba(
+            df
+        )[0]
 
         confidence = round(
             max(probabilities) * 100,

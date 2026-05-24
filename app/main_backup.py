@@ -2,18 +2,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from app.predictor import BurnoutPredictor
 
+app = FastAPI()
 
-app = FastAPI(
-    title="BurnoutSense API",
-    description="Student Burnout & Depression Risk Prediction API",
-    version="1.0.0"
-)
-
-predictor = BurnoutPredictor()
+predictor = BurnoutPredictor("app/model.pkl")
 
 
 class StudentInput(BaseModel):
-
     Gender: str
     Age: float
     City: str
@@ -34,7 +28,6 @@ class StudentInput(BaseModel):
 
 @app.get("/")
 def home():
-
     return {
         "message": "BurnoutSense API running"
     }
@@ -48,28 +41,18 @@ def predict(data: StudentInput):
         "Age": data.Age,
         "City": data.City,
         "Profession": data.Profession,
-        "Academic Pressure":
-            data.Academic_Pressure,
-        "Work Pressure":
-            data.Work_Pressure,
-        "CGPA":
-            data.CGPA,
-        "Study Satisfaction":
-            data.Study_Satisfaction,
-        "Job Satisfaction":
-            data.Job_Satisfaction,
-        "Sleep Duration":
-            data.Sleep_Duration,
-        "Dietary Habits":
-            data.Dietary_Habits,
-        "Degree":
-            data.Degree,
+        "Academic Pressure": data.Academic_Pressure,
+        "Work Pressure": data.Work_Pressure,
+        "CGPA": data.CGPA,
+        "Study Satisfaction": data.Study_Satisfaction,
+        "Job Satisfaction": data.Job_Satisfaction,
+        "Sleep Duration": data.Sleep_Duration,
+        "Dietary Habits": data.Dietary_Habits,
+        "Degree": data.Degree,
         "Have you ever had suicidal thoughts ?":
             data.Have_you_ever_had_suicidal_thoughts,
-        "Work/Study Hours":
-            data.Work_Study_Hours,
-        "Financial Stress":
-            data.Financial_Stress,
+        "Work/Study Hours": data.Work_Study_Hours,
+        "Financial Stress": data.Financial_Stress,
         "Family History of Mental Illness":
             data.Family_History_of_Mental_Illness
     }

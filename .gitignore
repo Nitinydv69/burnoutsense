@@ -1,27 +1,47 @@
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
 
-# Virtual env
+# Virtual environments
 .venv/
-env/
 venv/
+env/
 
-# Poetry
-poetry.lock
+# Logs
+*.log
+streamlit.log
 
-# Mac
+# OS / Editor files
 .DS_Store
+.vscode/
+.idea/
 
 # Jupyter
 .ipynb_checkpoints/
 
-# Dataset
-training/dataset.csv
+# Backup files
+*_backup.py
+main_backup.py
+predictor_backup.py
+streamlit_app_backup.py
 
-# Models (optional)
-# app/model.pkl
-# app/encoders.pkl
-# app/feature_columns.pkl
+# Local environment variables
+.env
+
+# Temporary files
+*.tmp
+*.bak
+
+# Cloud / build artifacts
+.gcloudignore
+
+# Python build artifacts
+build/
+dist/
+
+# Ignore cache
+.cache/
